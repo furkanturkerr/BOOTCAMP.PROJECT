@@ -1,6 +1,8 @@
+using Core.Entities;
+
 namespace Entities;
 
-public class Bootcamp
+public class Bootcamp : BaseEntity
 {
     public int Id { get; set; }
     public string Name { get; set; }

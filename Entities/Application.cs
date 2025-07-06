@@ -1,6 +1,8 @@
+using Core.Entities;
+
 namespace Entities;
 
-public class Application
+public class Application : BaseEntity
 {
     public int Id { get; set; }
     public int ApplicantId  { get; set; }
