@@ -1,5 +1,6 @@
 using Entities;
 using Microsoft.EntityFrameworkCore;
+using Repositories.EntityConfigurations;
 
 namespace Repositories.Contexts;
 
@@ -20,6 +21,13 @@ public class BaseDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new BlacklistConfiguration());
+        modelBuilder.ApplyConfiguration(new InstructorConfiguration());
+        modelBuilder.ApplyConfiguration(new ApplicantConfiguration());
+        modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new ApplicationConfiguration());
+        modelBuilder.ApplyConfiguration(new BootcampConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 }
