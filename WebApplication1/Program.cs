@@ -1,3 +1,4 @@
+using Core.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Abstracts;
 using Repositories.Concrete;
@@ -44,7 +45,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseRouting();
 app.UseAuthorization();
 
