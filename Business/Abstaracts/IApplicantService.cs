@@ -11,5 +11,5 @@ public interface IApplicantService
     Task<List<ApplicantManager.GetApplicantResponse>> GetAllAsync();
     Task<ApplicantManager.GetApplicantResponse> GetByIdAsync(int id);
     Task UpdateAsync(UpdateApplicantRequests request);
-    Task DeleteAsync(DeleteApplicantRequests request);
+    Task DeleteAsync(int request);
 }

@@ -53,17 +53,8 @@ public class ApplicantManager : IApplicantService
         await _applicantRepository.UpdateAsync(applicant);
     }
 
-    public Task DeleteAsync(DeleteApplicantRequests request)
+    public Task DeleteAsync(int request)
     {
-        return _applicantServiceImplementation.DeleteAsync(request);
-    }
-
-    public async Task DeleteAsync(int id)
-    {
-        var applicant = await _applicantRepository.GetByIdAsync(id);
-        if (applicant == null)
-            throw new NotFoundException("Başvuran bulunamadı");
-
-        await _applicantRepository.DeleteAsync(applicant);
+        throw new NotImplementedException();
     }
 }

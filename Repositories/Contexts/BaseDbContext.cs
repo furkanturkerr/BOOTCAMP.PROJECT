@@ -11,6 +11,16 @@ public class BaseDbContext : DbContext
         
     }
     
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+        // User ve Role tablolarının isimlerini özelleştirme
+        modelBuilder.Entity<User>().ToTable("Users");
+        modelBuilder.Entity<Role>().ToTable("Roles");
+    }
+
+    
     public DbSet<User> Users { get; set; }
     public DbSet<Applicant> Applicants { get; set; }
     public DbSet<Employee> Employees { get; set; }
@@ -19,15 +29,5 @@ public class BaseDbContext : DbContext
     public DbSet<Application> Applications { get; set; }
     public DbSet<Bootcamp> Bootcamps { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfiguration(new BlacklistConfiguration());
-        modelBuilder.ApplyConfiguration(new InstructorConfiguration());
-        modelBuilder.ApplyConfiguration(new ApplicantConfiguration());
-        modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-        modelBuilder.ApplyConfiguration(new UserConfiguration());
-        modelBuilder.ApplyConfiguration(new ApplicationConfiguration());
-        modelBuilder.ApplyConfiguration(new BootcampConfiguration());
-        base.OnModelCreating(modelBuilder);
-    }
+
 }
