@@ -1,12 +1,14 @@
 using Business.DTOs.Requests.User;
+using Business.DTOs.Response.User;
 
-namespace Business.Abstaracts;
+namespace Business.Abstracts;
 
 public interface IUserService
 {
-    Task GetAllAsync();
-    Task GetByIdAsync(int id);
-    Task UpdateAsync(UpdateUserRequest request);
-    Task DeleteAsync(int id);
+    Task<List<GetUserResponse>> GetAllAsync();
+    Task<GetUserResponse> GetByIdAsync(int id);
     Task<GetUserResponse> GetByEmailAsync(string email);
+    Task<GetUserResponse> AddAsync(CreateUserRequest request);
+    Task<GetUserResponse> UpdateAsync(int id, CreateUserRequest request);
+    Task DeleteAsync(int id);
 }

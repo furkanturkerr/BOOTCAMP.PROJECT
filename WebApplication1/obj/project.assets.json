@@ -38,6 +38,19 @@
           }
         }
       },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.1": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "[12.0.1]",
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Azure.Core/1.25.0": {
         "type": "package",
         "dependencies": {
@@ -80,6 +93,15 @@
           "lib/netstandard2.0/Azure.Identity.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "HashingUtilities/2017.9.20.9": {
+        "type": "package",
+        "compile": {
+          "lib/net461/HashingUtilities.dll": {}
+        },
+        "runtime": {
+          "lib/net461/HashingUtilities.dll": {}
         }
       },
       "HiNetCloud.System.IdentityModel.Tokens.Jwt/23.10.10.15": {
@@ -1896,6 +1918,22 @@
           }
         }
       },
+      "System.IO.Hashing/10.0.0-preview.6.25358.103": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/System.IO.Hashing.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.IO.Hashing.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
       "System.IO.Pipelines/6.0.3": {
         "type": "package",
         "compile": {
@@ -2933,7 +2971,10 @@
         "dependencies": {
           "AutoMapper": "15.0.1",
           "Entities": "1.0.0",
-          "Repositories": "1.0.0"
+          "HashingUtilities": "2017.9.20.9",
+          "IdentityModel": "6.2.0",
+          "Repositories": "1.0.0",
+          "System.IO.Hashing": "10.0.0-preview.6.25358.103"
         },
         "compile": {
           "bin/placeholder/Business.dll": {}
@@ -2976,6 +3017,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Entities": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0"
         },
         "compile": {
@@ -3020,6 +3062,20 @@
         "lib/netstandard2.0/AutoMapper.xml"
       ]
     },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.1": {
+      "sha512": "+g/K+Vpe3gGMKGzjslMOdqNlkikScDjWfVvmWTayrDHaG/n2pPmFBMa+jKX1r/h6BDGFdkyRjAuhFE3ykW+r1g==",
+      "type": "package",
+      "path": "automapper.extensions.microsoft.dependencyinjection/12.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
     "Azure.Core/1.25.0": {
       "sha512": "X8Dd4sAggS84KScWIjEbFAdt2U1KDolQopTPoHVubG2y3CM54f9l6asVrP5Uy384NWXjsspPYaJgz5xHc+KvTA==",
       "type": "package",
@@ -3056,6 +3112,18 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "HashingUtilities/2017.9.20.9": {
+      "sha512": "xOrY1GHiGbwWBf/EGDryAzPKKGknd77ARmprlnqpORR6BKYoN6RCpwOsiNGHt3MI/Qu+kqccfBhRjM5MD7gSkA==",
+      "type": "package",
+      "path": "hashingutilities/2017.9.20.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "hashingutilities.2017.9.20.9.nupkg.sha512",
+        "hashingutilities.nuspec",
+        "lib/net461/HashingUtilities.dll"
       ]
     },
     "HiNetCloud.System.IdentityModel.Tokens.Jwt/23.10.10.15": {
@@ -6102,6 +6170,35 @@
         "system.io.nuspec"
       ]
     },
+    "System.IO.Hashing/10.0.0-preview.6.25358.103": {
+      "sha512": "dW2mNobn8eN+dP0FPgm9EltPDDbkMmg56K/RrCjwu4firFFRh4VkZWLqRaVmoj3hj3urf2gNnrYJqax/AiWYyg==",
+      "type": "package",
+      "path": "system.io.hashing/10.0.0-preview.6.25358.103",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.IO.Hashing.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/System.IO.Hashing.targets",
+        "lib/net10.0/System.IO.Hashing.dll",
+        "lib/net10.0/System.IO.Hashing.xml",
+        "lib/net462/System.IO.Hashing.dll",
+        "lib/net462/System.IO.Hashing.xml",
+        "lib/net8.0/System.IO.Hashing.dll",
+        "lib/net8.0/System.IO.Hashing.xml",
+        "lib/net9.0/System.IO.Hashing.dll",
+        "lib/net9.0/System.IO.Hashing.xml",
+        "lib/netstandard2.0/System.IO.Hashing.dll",
+        "lib/netstandard2.0/System.IO.Hashing.xml",
+        "system.io.hashing.10.0.0-preview.6.25358.103.nupkg.sha512",
+        "system.io.hashing.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.IO.Pipelines/6.0.3": {
       "sha512": "ryTgF+iFkpGZY1vRQhfCzX0xTdlV3pyaTTqRu2ETbEv+HlV7O6y7hyQURnghNIXvctl5DuZ//Dpks6HdL/Txgw==",
       "type": "package",
@@ -8465,6 +8562,7 @@
     "net8.0": [
       "AspNetCoreRateLimit >= 5.0.0",
       "AutoMapper >= 15.0.1",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "Business >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.17",
@@ -8536,6 +8634,10 @@
             "target": "Package",
             "version": "[15.0.1, )"
           },
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[12.0.1, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[8.0.0, )"
@@ -8605,6 +8707,26 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1608",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package version outside of dependency constraint: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 requires AutoMapper (= 12.0.1) but version AutoMapper 15.0.1 was resolved.",
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'HashingUtilities 2017.9.20.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "HashingUtilities",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

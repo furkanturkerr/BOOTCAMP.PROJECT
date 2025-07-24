@@ -1,6 +1,4 @@
-using Core.Entities;
-
-namespace Entities;
+namespace Core.Entities;
 
 public class User : BaseEntity
 {
@@ -9,5 +7,4 @@ public class User : BaseEntity
     public string LastName { get; set; }
     public byte[] PasswordHash { get; set; }
     public byte[] PasswordSalt { get; set; }
-
 }

@@ -1,9 +1,9 @@
-namespace Business.DTOs.Requests.User;
+namespace Business.DTOs.Requests.Auth;
 
-public class UpdateUserRequest
+public class RegisterRequest
 {
-    public int Id { get; set; }
     public string Email { get; set; }
+    public string Password { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
 }

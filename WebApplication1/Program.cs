@@ -1,3 +1,4 @@
+using System.Reflection;
 using AspNetCoreRateLimit;
 using Business.Abstaracts;
 using Business.Concretes;
@@ -10,6 +11,7 @@ using Repositories.Contexts;
 using Repositories.Abstracts;
 using Repositories.Concrete;
 using System.Text;
+using Business.Concrete;
 using Core.Exceptions;
 using Microsoft.AspNetCore.Identity;
 
@@ -105,12 +107,20 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IBootcampRepository, BootcampRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IBlacklistRepository, BlacklistRepository>();
+builder.Services.AddScoped<IAuthService, AuthManager>();
 
 // Service Registrations
 builder.Services.AddScoped<ITokenHelper, JwtHelper>();
 // Diğer servislerinizi burada register edin
 
 // AutoMapper Configuration
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+// Repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Services
+builder.Services.AddScoped<IUserService, UserManager>();
 
 
 var app = builder.Build();
