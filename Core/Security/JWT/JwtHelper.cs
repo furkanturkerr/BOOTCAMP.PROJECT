@@ -1,10 +1,10 @@
-using Core.Entities;  // User ve Role sınıfları için
+using Core.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Azure.Core;
+using Entities;
 
 namespace Core.Security.JWT;
 
@@ -18,12 +18,12 @@ public class JwtHelper : ITokenHelper
         _tokenOptions = configuration.GetSection("TokenOptions").Get<TokenOptions>();
     }
 
-    public AccessToken CreateToken(User user, List<Role> roles)
+    public AccessToken CreateToken(UserRoleMapping userRole, List<Role> roles)
     {
         _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenOptions.SecurityKey));
         var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-        var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, roles);
+        var jwt = CreateJwtSecurityToken(_tokenOptions, userRole, signingCredentials, roles);
         var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
         var token = jwtSecurityTokenHandler.WriteToken(jwt);
 
@@ -34,7 +34,7 @@ public class JwtHelper : ITokenHelper
         };
     }
 
-    private JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,
+    private JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, UserRoleMapping userRole,
         SigningCredentials signingCredentials, List<Role> roles)
     {
         var jwt = new JwtSecurityToken(
@@ -42,19 +42,19 @@ public class JwtHelper : ITokenHelper
             audience: tokenOptions.Audience,
             expires: _accessTokenExpiration,
             notBefore: DateTime.Now,
-            claims: SetClaims(user, roles),
+            claims: SetClaims(userRole, roles),
             signingCredentials: signingCredentials
         );
         return jwt;
     }
 
-    private IEnumerable<Claim> SetClaims(User user, List<Role> roles)
+    private IEnumerable<Claim> SetClaims(UserRoleMapping userRole, List<Role> roles)
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}")
+            new Claim(ClaimTypes.NameIdentifier, userRole.Id.ToString()),
+            new Claim(ClaimTypes.Email, userRole.User.Email),
+            new Claim(ClaimTypes.Name, $"{userRole.User.FirstName} {userRole.User.LastName}")
         };
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role.Name)));
         return claims;

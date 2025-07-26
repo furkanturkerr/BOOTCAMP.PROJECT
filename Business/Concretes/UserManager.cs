@@ -1,89 +1,98 @@
-using AutoMapper;
-using Business.Abstaracts;
+using Business.Abstracts;
 using Business.DTOs.Requests.User;
 using Business.DTOs.Response.User;
-using Core.Entities;
 using Core.Security.Hashing;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using Core.Entities;
 using Repositories.Abstracts;
 
-namespace Business.Concrete;
+namespace Business.Concretes;
 
 public class UserManager : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
 
-    public UserManager(IUserRepository userRepository, IMapper mapper)
+    public UserManager(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _mapper = mapper;
     }
 
-    public async Task<List<GetUserResponse>> GetAllAsync()
+    public async Task<User> GetByEmailAsync(string email)
+    {
+        return await _userRepository.GetByEmailAsync(email);
+    }
+
+    public async Task<GetUserListResponse> GetAllAsync()
     {
         var users = await _userRepository.GetAllAsync();
-        return _mapper.Map<List<GetUserResponse>>(users);
+
+        var response = new GetUserListResponse
+        {
+            Items = users.Select(u => new GetUserResponse
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                DateOfBirth = u.DateOfBirth,
+                NationalityIdentity = u.NationalityIdentity,
+                Roles = new List<string>()
+            }).ToList(),
+            Count = users.Count()
+        };
+
+        return response;
     }
 
     public async Task<GetUserResponse> GetByIdAsync(int id)
     {
-        var user = await _userRepository.GetByIdAsync(id);
+        var user = await _userRepository.GetAsync(u => u.Id == id, null);
+
         if (user == null)
             throw new Exception("Kullanıcı bulunamadı");
-            
-        return _mapper.Map<GetUserResponse>(user);
+
+        return new GetUserResponse
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            DateOfBirth = user.DateOfBirth,
+            NationalityIdentity = user.NationalityIdentity,
+            Roles = new List<string>()
+        };
     }
 
-    public async Task<GetUserResponse> GetByEmailAsync(string email)
+    public async Task AddAsync(CreateUserRequest request)
     {
-        var user = await _userRepository.GetByEmailAsync(email);
-        if (user == null)
-            throw new Exception("Kullanıcı bulunamadı");
-            
-        return _mapper.Map<GetUserResponse>(user);
-    }
-
-    public async Task<GetUserResponse> AddAsync(CreateUserRequest request)
-    {
-        var existingUser = await _userRepository.GetByEmailAsync(request.Email);
-        if (existingUser != null)
-            throw new Exception("Bu email adresi zaten kayıtlı");
+        var isEmailExists = await _userRepository.GetAsync(u => u.Email == request.Email, null);
+        if (isEmailExists != null)
+            throw new Exception("Bu email adresi zaten kullanılıyor");
 
         byte[] passwordHash, passwordSalt;
         HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
 
-        var user = _mapper.Map<User>(request);
-        user.PasswordHash = passwordHash;
-        user.PasswordSalt = passwordSalt;
-
-        var createdUser = await _userRepository.AddAsync(user);
-        return _mapper.Map<GetUserResponse>(createdUser);
-    }
-
-    public async Task<GetUserResponse> UpdateAsync(UpdateUserRequest request)
-    {
-        var user = await _userRepository.GetByIdAsync(request.Id);
-        if (user == null)
-            throw new Exception("Kullanıcı bulunamadı");
-
-        if (!string.IsNullOrEmpty(request.Email) && request.Email != user.Email)
+        var user = new User
         {
-            var existingUser = await _userRepository.GetByEmailAsync(request.Email);
-            if (existingUser != null)
-                throw new Exception("Bu email adresi zaten kayıtlı");
-        }
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            DateOfBirth = request.DateOfBirth,
+            NationalityIdentity = request.NationalityIdentity,
+            PasswordHash = passwordHash,
+            PasswordSalt = passwordSalt
+        };
 
-        _mapper.Map(request, user);
-        var updatedUser = await _userRepository.UpdateAsync(user);
-        return _mapper.Map<GetUserResponse>(updatedUser);
+        await _userRepository.AddAsync(user);
     }
 
     public async Task DeleteAsync(int id)
     {
-        var user = await _userRepository.GetByIdAsync(id);
+        var user = await _userRepository.GetAsync(u => u.Id == id, null);
         if (user == null)
             throw new Exception("Kullanıcı bulunamadı");
-            
+
         await _userRepository.DeleteAsync(user);
     }
 }

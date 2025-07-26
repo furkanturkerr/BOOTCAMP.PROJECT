@@ -58,6 +58,14 @@
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
               "version": "[2.3.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Volo.Abp.Core": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

@@ -11,7 +11,6 @@ using Repositories.Contexts;
 using Repositories.Abstracts;
 using Repositories.Concrete;
 using System.Text;
-using Business.Concrete;
 using Core.Exceptions;
 using Microsoft.AspNetCore.Identity;
 
@@ -100,14 +99,13 @@ builder.Services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounte
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
 // Repository Registrations
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
 builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IBootcampRepository, BootcampRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IBlacklistRepository, BlacklistRepository>();
-builder.Services.AddScoped<IAuthService, AuthManager>();
+builder.Services.AddScoped<ITokenHelper, JwtHelper>();
 
 // Service Registrations
 builder.Services.AddScoped<ITokenHelper, JwtHelper>();
@@ -116,11 +114,6 @@ builder.Services.AddScoped<ITokenHelper, JwtHelper>();
 // AutoMapper Configuration
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-// Repositories
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-// Services
-builder.Services.AddScoped<IUserService, UserManager>();
 
 
 var app = builder.Build();

@@ -1,11 +1,9 @@
+// WebAPI/Controllers/AuthController.cs
 using Business.Abstaracts;
-using Business.Abstracts;
-using Business.DTOs.Requests.Auth;
-using Business.DTOs.Response.Auth;
-using Business.DTOs.Responses.Auth;
+using Business.DTOs.Requests.Auth;  // LoginRequest ve RegisterRequest için
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Controllers;
+namespace WebApplication1.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -19,14 +17,14 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<TokenResponse>> Login([FromBody] LoginRequest loginRequest)
+    public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
         var result = await _authService.LoginAsync(loginRequest);
         return Ok(result);
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<TokenResponse>> Register([FromBody] RegisterRequest registerRequest)
+    public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
     {
         var result = await _authService.RegisterAsync(registerRequest);
         return Created("", result);

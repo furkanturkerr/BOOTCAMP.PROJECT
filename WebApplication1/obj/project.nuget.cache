@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "K0wCsLWWi3c=",
+  "dgSpecHash": "s+h/VuFCbkM=",
   "success": true,
   "projectFilePath": "C:\\Users\\Furkan\\Proje ve Dersler\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,9 @@
     "C:\\Users\\Furkan\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Furkan\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Furkan\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\Furkan\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
+    "C:\\Users\\Furkan\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
+    "C:\\Users\\Furkan\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
     "C:\\Users\\Furkan\\.nuget\\packages\\hashingutilities\\2017.9.20.9\\hashingutilities.2017.9.20.9.nupkg.sha512",
     "C:\\Users\\Furkan\\.nuget\\packages\\hinetcloud.system.identitymodel.tokens.jwt\\23.10.10.15\\hinetcloud.system.identitymodel.tokens.jwt.23.10.10.15.nupkg.sha512",
     "C:\\Users\\Furkan\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

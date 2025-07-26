@@ -1,13 +1,19 @@
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using Entities;
 
 namespace Core.Entities;
-
-public class User : IdentityUser<int>
+public class User : BaseEntity
 {
-    public byte[] PasswordSalt;
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public DateTime CreatedDate { get; set; }
-    public DateTime? UpdatedDate { get; set; }
-    public DateTime? DeletedDate { get; set; }
+    public string Email { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string NationalityIdentity { get; set; }
+    public byte[] PasswordHash { get; set; }
+    public byte[] PasswordSalt { get; set; }
+    
+    public virtual ICollection<UserRoleMapping> UserRoles { get; set; }
+
+
 }
+

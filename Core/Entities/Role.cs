@@ -1,10 +1,6 @@
-using Microsoft.AspNetCore.Identity;
-
 namespace Core.Entities;
 
-public class Role : IdentityRole<int>
+public class Role : BaseEntity
 {
-    public DateTime CreatedDate { get; set; }
-    public DateTime? UpdatedDate { get; set; }
-    public DateTime? DeletedDate { get; set; }
+    public string Name { get; set; }
 }

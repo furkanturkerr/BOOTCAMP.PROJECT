@@ -1,8 +1,9 @@
-
+using Core.DataAccess;
+using Core.Entities;
 
 namespace Repositories.Abstracts;
 
-public interface IUserRepository : IGenericRepository<User>
+public interface IUserRepository : IRepository<User>
 {
-    Task<User?> GetByEmailAsync(string email);
+    Task<User> GetByEmailAsync(string email);
 }
